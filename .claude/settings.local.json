@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(openspec *)",
+      "Bash(npm create *)",
+      "Bash(npm install *)",
+      "PowerShell(Set-Location D:\\\\claude_AI\\\\backend; Start-Process -NoNewWindow -FilePath \"uvicorn\" -ArgumentList \"app.main:app\", \"--reload\", \"--port\", \"8000\" -RedirectStandardOutput \"$env:TEMP\\\\rag_backend.log\" -RedirectStandardError \"$env:TEMP\\\\rag_backend_err.log\" -PassThru | Select-Object Id)",
+      "PowerShell(Get-Command *)",
+      "PowerShell(python -m uvicorn --version 2>&1)",
+      "Read(//mnt/d/claude_AI/**)",
+      "Bash(python -m uvicorn app.main:app --reload --port 8000)",
+      "Bash(echo \"Backend PID: $!\")",
+      "PowerShell(Get-Content *)"
+    ]
+  }
+}
