@@ -10,7 +10,10 @@
       "Read(//mnt/d/claude_AI/**)",
       "Bash(python -m uvicorn app.main:app --reload --port 8000)",
       "Bash(echo \"Backend PID: $!\")",
-      "PowerShell(Get-Content *)"
+      "PowerShell(Get-Content *)",
+      "Bash(git rm *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
     ]
   }
 }
