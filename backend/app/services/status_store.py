@@ -1,6 +1,6 @@
 import uuid
 from datetime import datetime, timezone
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass
@@ -10,18 +10,20 @@ class DocumentRecord:
     status: str  # processing | ready | failed
     uploaded_at: str
     error: str | None = None
+    source_url: str | None = None
 
 
 _store: dict[str, DocumentRecord] = {}
 
 
-def create_record(filename: str) -> str:
+def create_record(filename: str, source_url: str | None = None) -> str:
     doc_id = str(uuid.uuid4())
     _store[doc_id] = DocumentRecord(
         doc_id=doc_id,
         filename=filename,
         status="processing",
         uploaded_at=datetime.now(timezone.utc).isoformat(),
+        source_url=source_url,
     )
     return doc_id
 
@@ -54,7 +56,6 @@ def ready_doc_ids() -> list[str]:
 
 
 def restore_record(doc_id: str, filename: str) -> None:
-    """Re-add a document that is already indexed in ChromaDB but lost from the in-memory store."""
     if doc_id not in _store:
         _store[doc_id] = DocumentRecord(
             doc_id=doc_id,

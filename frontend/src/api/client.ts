@@ -4,6 +4,7 @@ export interface DocumentRecord {
   status: 'processing' | 'ready' | 'failed'
   uploaded_at: string
   error?: string | null
+  source_url?: string | null
 }
 
 export interface Source {
@@ -38,6 +39,19 @@ export async function listDocuments(): Promise<DocumentRecord[]> {
 export async function getDocumentStatus(docId: string): Promise<DocumentRecord> {
   const res = await fetch(`/documents/${docId}/status`)
   if (!res.ok) throw new Error('Failed to fetch status')
+  return res.json()
+}
+
+export async function scrapeUrl(url: string): Promise<{ doc_id: string; status: string; source_url: string }> {
+  const res = await fetch('/documents/url', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ url }),
+  })
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText }))
+    throw new Error(err.detail ?? 'Scrape failed')
+  }
   return res.json()
 }
 

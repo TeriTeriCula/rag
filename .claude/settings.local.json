@@ -13,7 +13,10 @@
       "PowerShell(Get-Content *)",
       "Bash(git rm *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "PowerShell(pip install *)",
+      "PowerShell(python -c \"import requests, bs4, lxml; print\\('OK'\\)\" 2>&1)",
+      "Bash(npm run *)"
     ]
   }
 }
